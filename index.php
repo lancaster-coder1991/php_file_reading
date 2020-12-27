@@ -20,10 +20,14 @@
         }
 
         function stripInfo($obj) {
+            $attachments = $obj['attachments'][0];
+
             $strippedInfo = new Article();
-            $strippedInfo->title = $obj['attachments'][0]['title'];
-            $strippedInfo->image = $obj['attachments'][0]['image_url'];
-            $strippedInfo->link = $obj['attachments'][0]['from_url'];
+            $strippedInfo->title = $attachments['title'];
+            $strippedInfo->image = $attachments['image_url'];
+            $strippedInfo->link = $attachments['from_url'];
+            $strippedInfo->service = $attachments['service_name'];
+            
             return $strippedInfo;
         }
 
@@ -31,9 +35,9 @@
     ?>
     <div id="articles-container">
         <?php
-        foreach($articles as $article) { ?>
-            <a href=<?php echo($article->link)?>> <h3><?php print($article->title); ?> </h3></a>
-            <img src=<?php echo($article->image)?>>
+        foreach($articles as $article) { echo($article->service . " image")?>
+            <a href=<?php echo($article->link)?>> <h3 class="article-title"><?php print($article->title); ?> </h3></a>
+            <img class="article-image" src=<?php echo($article->image)?> alt=<?php echo($article->service . " image")?>>
        <?php } ?>
         </div>
 </body>

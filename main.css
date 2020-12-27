@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+
+body {
+  font-family: "DM SANS", sans-serif;
+}
+
+#articles-container {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+}
+
+.article-image {
+  width: 25%;
+}
