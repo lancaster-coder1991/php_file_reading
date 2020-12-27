@@ -11,7 +11,15 @@
     <?php  
         $jsondata = file_get_contents("2020-01-02.json");
         $json = json_decode($jsondata, true);
-        $allButFirst = array_slice($json,1);
+
+        function filterArticles($article) {
+            if(isset($article['attachments'])
+            and isset($article['attachments'][0]['title'])
+            and isset($article['attachments'][0]['image_url'])
+            and isset($article['attachments'][0]['from_url'])) return true;
+        }
+
+        $filteredList = array_filter($json,"filterArticles");
 
         class Article {
             public $title;
@@ -31,7 +39,7 @@
             return $strippedInfo;
         }
 
-        $articles = array_map("stripInfo", $allButFirst);
+        $articles = array_map("stripInfo", $filteredList);
         print_r($articles[0]->title);
     ?>
     <div id="articles-container">
