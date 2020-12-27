@@ -1,16 +1,35 @@
-<?php  
-    $jsondata = file_get_contents("2020-01-02.json");
-    $json = json_decode($jsondata, true);
-    // print_r($json);
-    // print_r($json[0]['files'][0]['title']);
-    $allButFirst = array_slice($json,1);
-    // print_r($allButFirst[0]);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 
-    function stripInfo($obj) {
-        $strippedInfo = new stdClass();
-        $strippedInfo->title = $obj['attachments'][0]['title'];
-        return $strippedInfo;
-    }
+    <?php  
+        $jsondata = file_get_contents("2020-01-02.json");
+        $json = json_decode($jsondata, true);
+        $allButFirst = array_slice($json,1);
 
-    print_r(array_map("stripInfo", $allButFirst)[1]);
-?>
+        class Article {
+            public $title;
+            public $image;
+            public $link;
+        }
+
+        function stripInfo($obj) {
+            $strippedInfo = new Article();
+            $strippedInfo->title = $obj['attachments'][0]['title'];
+            $strippedInfo->image = $obj['attachments'][0]['image_url'];
+            $strippedInfo->link = $obj['attachments'][0]['from_url'];
+            return $strippedInfo;
+        }
+
+        $articles = array_map("stripInfo", $allButFirst);
+        print_r($articles[1]->image);
+
+        
+    ?>
+</body>
+</html>
