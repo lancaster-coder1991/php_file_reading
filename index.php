@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
     <title>Document</title>
 </head>
 <body>
@@ -27,9 +28,13 @@
         }
 
         $articles = array_map("stripInfo", $allButFirst);
-        print_r($articles[1]->image);
-
-        
     ?>
+    <div id="articles-container">
+        <?php
+        foreach($articles as $article) { ?>
+            <a href=<?php echo($article->link)?>> <h3><?php print($article->title); ?> </h3></a>
+            <img src=<?php echo($article->image)?>>
+       <?php } ?>
+        </div>
 </body>
 </html>
