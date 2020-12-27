@@ -32,12 +32,14 @@
         }
 
         $articles = array_map("stripInfo", $allButFirst);
+        print_r($articles[0]->title);
     ?>
     <div id="articles-container">
         <?php
-        foreach($articles as $article) { echo($article->service . " image")?>
+        $index = 0;
+        foreach($articles as $article) { ?>
             <a href=<?php echo($article->link)?>> <h3 class="article-title"><?php print($article->title); ?> </h3></a>
-            <img class="article-image" src=<?php echo($article->image)?> alt=<?php echo($article->service . " image")?>>
+            <img id=<?php echo($article->title)?> class="article-image" src=<?php echo($article->image)?> alt=<?php echo($article->service . " image")?>>
        <?php } ?>
         </div>
 </body>
