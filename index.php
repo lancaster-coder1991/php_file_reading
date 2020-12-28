@@ -46,26 +46,21 @@
 
         $articles = array_map("stripInfo", $filteredList);
     ?>
-    <div id="articles-container">
-        <?php 
-       $headerArr = get_headers($articles[3]->image);
-        $string = $headerArr[0];
-        if(strpos($string,"200"))
-  {
-    print 'url exists';
-  }
-  else
-  {
-    print 'url does not exist';
-  }
-        ?>
-    <!-- <a href=<?php echo($article->link)?>> <h3 class="article-title"><?php print($article->title); ?> </h3></a>
-            <img id=<?php echo($article->title)?> class="article-image" src=<?php echo($article->image)?> alt=<?php echo($article->service . " image")?>> -->
+    <div id="articles-list">
+
         <?php
         $index = 0;
-        foreach($articles as $article) { ?>
-            <a href=<?php echo($article->link)?>> <h3 class="article-title"><?php print($article->title); ?> </h3></a>
-            <img id=<?php echo($article->title)?> class="article-image" src=<?php echo($article->image)?> alt=<?php echo($article->service . " image")?>>
+        foreach($articles as $article) { 
+            // $headerArr = get_headers($article->image);
+            // $string = $headerArr[0];
+            // if(strpos($string,"200")) { }
+
+        ?>
+        <div class="article-container">
+             <h3 class="article-title"><a class="article-link" href=<?php echo($article->link)?>><?php print($article->title); ?> </a></h3>
+
+            <img class="article-image" src=<?php echo($article->image)?> alt=<?php echo($article->service . " image")?>>
+        </div>
        <?php } ?>
         </div>
 </body>

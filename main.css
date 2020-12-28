@@ -4,12 +4,24 @@ body {
   font-family: "DM SANS", sans-serif;
 }
 
-#articles-container {
+#articles-list {
   display: flex;
   flex-direction: column;
 }
 
-a {
+.article-container {
+  display: flex;
+  flex-direction: column;
+  margin: 1%;
+  width: 70%;
+}
+
+.article-title {
+  display: inline-block;
+}
+
+.article-link {
+  width: auto;
   text-decoration: none;
 }
 
