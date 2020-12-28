@@ -19,7 +19,6 @@
             and isset($article['attachments'][0]['from_url'])) return true;
         }
 
-        $firstEntry = array_slice($json, 0, 1);
         $filteredList = array_filter($json,"filterArticles");
 
         class Article {
@@ -37,9 +36,6 @@
             }
         }
 
-        $firstFiles = $firstEntry[0]['files'][0];
-        $firstArticle = new Article("Digital Disruption in Retailing", $firstFiles['thumb_pdf']);
-
         function stripInfo($obj) {
             $attachments = $obj['attachments'][0];
 
@@ -51,7 +47,18 @@
         $articles = array_map("stripInfo", $filteredList);
     ?>
     <div id="articles-container">
-        <?php print_r($firstEntry[0]['files'][0]['title']) ?>
+        <?php 
+       $headerArr = get_headers($articles[3]->image);
+        $string = $headerArr[0];
+        if(strpos($string,"200"))
+  {
+    print 'url exists';
+  }
+  else
+  {
+    print 'url does not exist';
+  }
+        ?>
     <!-- <a href=<?php echo($article->link)?>> <h3 class="article-title"><?php print($article->title); ?> </h3></a>
             <img id=<?php echo($article->title)?> class="article-image" src=<?php echo($article->image)?> alt=<?php echo($article->service . " image")?>> -->
         <?php
