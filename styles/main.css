@@ -4,6 +4,21 @@ body {
   font-family: "DM SANS", sans-serif;
 }
 
+#site-header {
+  display: flex;
+  justify-content: center;
+}
+
+#site-title {
+  align-self: flex-end;
+  margin-right: 2%;
+  color: #ff5700;
+}
+
+#site-image {
+  height: 100px;
+}
+
 #articles-list {
   display: flex;
   flex-direction: column;
@@ -12,8 +27,7 @@ body {
 .article-container {
   display: flex;
   flex-direction: column;
-  margin: 1%;
-  width: 70%;
+  margin: 0.5%;
 }
 
 .article-title {
@@ -27,4 +41,13 @@ body {
 
 .article-image {
   width: 25%;
+}
+
+hr {
+  border: none;
+  border-top: 2px dotted rgb(140, 131, 165);
+  color: #fff;
+  background-color: #fff;
+  height: 1px;
+  margin: 0.5%;
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -46,6 +46,10 @@
 
         $articles = array_map("stripInfo", $filteredList);
     ?>
+    <div id="site-header">
+        <h1 id="site-title">Geddit</h1>
+        <img id="site-image" src="/images/alien.jpg" alt="">
+    </div>
     <div id="articles-list">
 
         <?php
@@ -61,6 +65,7 @@
 
             <img class="article-image" src=<?php echo($article->image)?> alt=<?php echo($article->service . " image")?>>
         </div>
+        <hr>
        <?php } ?>
         </div>
 </body>
