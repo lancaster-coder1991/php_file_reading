@@ -19,30 +19,41 @@
             and isset($article['attachments'][0]['from_url'])) return true;
         }
 
+        $firstEntry = array_slice($json, 0, 1);
         $filteredList = array_filter($json,"filterArticles");
 
         class Article {
             public $title;
             public $image;
             public $link;
+            public $service;
+
+            function __construct($title, $image, $link, $service)
+            {
+                $this->title = $title;
+                $this->image = $image;
+                $this->link = $link;
+                $this->service = $service;
+            }
         }
+
+        $firstFiles = $firstEntry[0]['files'][0];
+        $firstArticle = new Article("Digital Disruption in Retailing", $firstFiles['thumb_pdf']);
 
         function stripInfo($obj) {
             $attachments = $obj['attachments'][0];
 
-            $strippedInfo = new Article();
-            $strippedInfo->title = $attachments['title'];
-            $strippedInfo->image = $attachments['image_url'];
-            $strippedInfo->link = $attachments['from_url'];
-            $strippedInfo->service = $attachments['service_name'];
+            $strippedInfo = new Article($attachments['title'], $attachments['image_url'], $attachments['from_url'], $attachments['service_name']);
             
             return $strippedInfo;
         }
 
         $articles = array_map("stripInfo", $filteredList);
-        print_r($articles[0]->title);
     ?>
     <div id="articles-container">
+        <?php print_r($firstEntry[0]['files'][0]['title']) ?>
+    <!-- <a href=<?php echo($article->link)?>> <h3 class="article-title"><?php print($article->title); ?> </h3></a>
+            <img id=<?php echo($article->title)?> class="article-image" src=<?php echo($article->image)?> alt=<?php echo($article->service . " image")?>> -->
         <?php
         $index = 0;
         foreach($articles as $article) { ?>
