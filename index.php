@@ -63,7 +63,7 @@
         <div class="article-container">
              <h3 class="article-title"><a class="article-link" href=<?php echo($article->link)?>><?php print($article->title); ?> </a></h3>
            <?php  if(strpos($string,"200")) { ?>
-            <img class="article-image" src=<?php echo($article->image)?> alt=<?php echo("$article->service . image")?>>
+            <img class="article-image" src=<?php echo($article->image)?> alt="<?php echo $article->service?> image">
            <?php } ?>
         </div>
         <hr>
