@@ -48,7 +48,7 @@
     ?>
     <div id="site-header">
         <h1 id="site-title">Geddit</h1>
-        <img id="site-image" src="/images/alien.jpg" alt="">
+        <img id="site-image" src="/images/alien.png" alt="">
     </div>
     <div id="articles-list">
 

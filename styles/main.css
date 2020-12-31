@@ -2,11 +2,13 @@
 
 body {
   font-family: "DM SANS", sans-serif;
+  background-image: url("../images/repeated-square.png");
 }
 
 #site-header {
   display: flex;
   justify-content: center;
+  background-color: #cee3f8;
 }
 
 #site-title {
