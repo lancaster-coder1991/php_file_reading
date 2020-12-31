@@ -8,10 +8,12 @@
 </head>
 <body>
 
-    <?php  
-        $jsondata = file_get_contents("2020-01-02.json");
+    <?php 
+        // Read data from file, parse and save to array variable
+        $jsondata = file_get_contents("./data/2020-01-02.json");
         $json = json_decode($jsondata, true);
 
+        //Create a function to filter out the articles that don't have titles, images or links
         function filterArticles($article) {
             if(isset($article['attachments'])
             and isset($article['attachments'][0]['title'])
@@ -19,8 +21,10 @@
             and isset($article['attachments'][0]['from_url'])) return true;
         }
 
+        //Create filtered array using above function
         $filteredList = array_filter($json,"filterArticles");
 
+        //Create new class for article objects with only the required information (include service for alt attribute for img elements)
         class Article {
             public $title;
             public $image;
@@ -38,9 +42,7 @@
 
         function stripInfo($obj) {
             $attachments = $obj['attachments'][0];
-
             $strippedInfo = new Article($attachments['title'], $attachments['image_url'], $attachments['from_url'], $attachments['service_name']);
-            
             return $strippedInfo;
         }
 
@@ -61,7 +63,7 @@
         <div class="article-container">
              <h3 class="article-title"><a class="article-link" href=<?php echo($article->link)?>><?php print($article->title); ?> </a></h3>
            <?php  if(strpos($string,"200")) { ?>
-            <img class="article-image" src=<?php echo($article->image)?> alt=<?php echo($article->service . " image")?>>
+            <img class="article-image" src=<?php echo($article->image)?> alt=<?php echo("$article->service . image")?>>
            <?php } ?>
         </div>
         <hr>
