@@ -9,7 +9,7 @@
 <body>
 
     <?php 
-        // Read data from file, parse and save to array variable
+        //Read data from file, parse and save to array variable
         $jsondata = file_get_contents("./data/2020-01-02.json");
         $json = json_decode($jsondata, true);
 
@@ -24,7 +24,7 @@
         //Create filtered array using above function
         $filteredList = array_filter($json,"filterArticles");
 
-        //Create new class for article objects with only the required information (include service for alt attribute for img elements)
+        //Create new class for article objects with only the required information (include service for alt attribute in img elements)
         class Article {
             public $title;
             public $image;
@@ -40,29 +40,34 @@
             }
         }
 
+        //Create function to map over filtered articles and keep only the required information
         function stripInfo($obj) {
             $attachments = $obj['attachments'][0];
             $strippedInfo = new Article($attachments['title'], $attachments['image_url'], $attachments['from_url'], $attachments['service_name']);
             return $strippedInfo;
         }
 
+        //Create new variable of mapped articles
         $articles = array_map("stripInfo", $filteredList);
     ?>
     <div id="site-header">
         <h1 id="site-title">Geddit</h1>
-        <img id="site-image" src="/images/alien.png" alt="">
+        <img id="site-image" src="/images/alien.png" alt="geddit alien">
     </div>
     <div id="articles-list">
 
         <?php
-        $index = 0;
-        foreach($articles as $article) { 
-            $headerArr = get_headers($article->image);
-            $string = $headerArr[0];
+        //Loop over articles and create a new article entry for each
+        foreach($articles as $article) {
         ?>
         <div class="article-container">
-             <h3 class="article-title"><a class="article-link" href=<?php echo($article->link)?>><?php print($article->title); ?> </a></h3>
-           <?php  if(strpos($string,"200")) { ?>
+            <h3 class="article-title"><a class="article-link" href=<?php echo($article->link)?>><?php print($article->title); ?> </a></h3>
+           
+           <?php
+           //Check whether the image link is valid, and only display an image element if so
+            $headerArr = get_headers($article->image);
+            $string = $headerArr[0];
+           if(strpos($string,"200")) { ?>
             <img class="article-image" src=<?php echo($article->image)?> alt="<?php echo $article->service?> image">
            <?php } ?>
         </div>
